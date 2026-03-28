@@ -1,1 +1,89 @@
-ddddddddp
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form WhatsApp</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom right, #50a3a2, #53e3a6);
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: white;
+}
+
+.container {
+  text-align: center;
+}
+
+input {
+  padding: 10px;
+  width: 250px;
+  border-radius: 5px;
+  border: none;
+  margin-top: 10px;
+  text-align: center;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px;
+  width: 250px;
+  border: none;
+  border-radius: 5px;
+  background: white;
+  color: #53e3a6;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #f1f1f1;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>Kirim WhatsApp</h2>
+
+  <form id="waForm">
+    <input type="text" name="no_wa" placeholder="Masukkan No WhatsApp..." required>
+    <br>
+    <button type="submit">Kirim</button>
+  </form>
+</div>
+
+<script>
+document.getElementById("waForm").onsubmit = function(e) {
+    e.preventDefault();
+
+    let no = document.querySelector('[name=no_wa]').value;
+
+    // bersihkan karakter selain angka
+    no = no.replace(/\D/g, '');
+
+    // ubah 08 -> 62
+    if (no.startsWith('0')) {
+        no = '62' + no.slice(1);
+    }
+
+    // validasi sederhana
+    if (no.length < 10) {
+        alert("Nomor tidak valid");
+        return;
+    }
+
+    // buka WhatsApp
+    window.location.href = "https://wa.me/" + no;
+};
+</script>
+
+</body>
+</html>
